@@ -1,0 +1,2 @@
+rootProject.name='aodingPlayerMonitor'
+include ':app'
