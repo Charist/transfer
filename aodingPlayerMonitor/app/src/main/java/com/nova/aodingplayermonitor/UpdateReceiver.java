@@ -1,10 +1,13 @@
 package com.nova.aodingplayermonitor;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.util.Log;
 
 public class UpdateReceiver extends BroadcastReceiver {
@@ -20,7 +23,12 @@ public class UpdateReceiver extends BroadcastReceiver {
             Intent bootServiceIntent=new Intent(context, MonitorService.class); //接收到广播后，跳转到MainActivity
 
             Log.d(CLASS_NAME, "onReceive BOOT_COMPLETED!! " +  context.getPackageName());
-            context.startService(bootServiceIntent);//startForegroundService
+            if (Build.VERSION.SDK_INT >= 26) {
+                context.startForegroundService(bootServiceIntent);//startForegroundService
+            }
+            else{
+                context.startService(bootServiceIntent);//startForegroundService
+            }
             //context.startForegroundService(bootServiceIntent);//startForegroundService
 
         }
@@ -62,6 +70,5 @@ public class UpdateReceiver extends BroadcastReceiver {
         }
         return false;
     }
-
 
 }
