@@ -23,7 +23,7 @@ public class UpdateReceiver extends BroadcastReceiver {
             Intent bootServiceIntent=new Intent(context, MonitorService.class); //接收到广播后，跳转到MainActivity
 
             Log.d(CLASS_NAME, "onReceive BOOT_COMPLETED!! " +  context.getPackageName());
-            if (Build.VERSION.SDK_INT >= 26) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 context.startForegroundService(bootServiceIntent);//startForegroundService
             }
             else{
